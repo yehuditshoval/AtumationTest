@@ -31,6 +31,7 @@ public class TestAtu {
     Login loginPage;
     HomePage homePage;
     Search searchPage;
+    Book[] books = new Book[8];
 
 
     @BeforeClass
@@ -39,7 +40,7 @@ public class TestAtu {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get(getData("url"));
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         loginPage= PageFactory.initElements(driver, Login.class);
         homePage= PageFactory.initElements(driver, HomePage.class);
         searchPage= PageFactory.initElements(driver, Search.class);
@@ -59,11 +60,15 @@ public class TestAtu {
     }
 
     @Test
+    public void Test2(){
+        homePage.goShopBook();
+    }
+
+    @Test
     public void Test3(){
       searchPage.search(getData("search1"));
       List<WebElement> list=driver.findElements(By.xpath("//*[@id='see-book-Git Pocket Guide']/a"));
       Assert.assertEquals(list.size(),1);
-
     }
     @Test
     public void Test4(){
@@ -75,7 +80,6 @@ public class TestAtu {
     @Test
     public void Test5(){
         driver.navigate().refresh();
-        Book[] books = new Book[8];
         for (int i = 0; i < 8; i++) {
             String xpathTitle = driver.findElement(By.xpath("//*[@id=\"app\"]/div/div/div/div[2]/div[2]/div[2]/div[1]/div[2]/div[" + i + "]/div/div[2]")).getText();
             String title = xpathTitle;
@@ -86,7 +90,7 @@ public class TestAtu {
         }
     }
     @Test
-    public void Test5(){
+    public void Test6(){
         for (Book b : books) {
             b.printBook();
         }
@@ -96,7 +100,7 @@ public class TestAtu {
     @AfterMethod
     public void afterMethod() throws InterruptedException
     {
-        Thread.sleep(2000);
+        Thread.sleep(4000);
     }
 
 
@@ -119,3 +123,5 @@ public class TestAtu {
         return doc.getElementsByTagName(nodeName).item(0).getTextContent();
     }
 }
+
+

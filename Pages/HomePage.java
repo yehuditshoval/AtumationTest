@@ -7,14 +7,10 @@ import org.openqa.selenium.support.FindBy;
 
 public class HomePage {
 
-    @FindBy(xpath="//*[@id=\"item-2\"]")
+    @FindBy(id="gotoStore")
     public WebElement btn_shopOfBooks;
 
     public  void  goShopBook() {
-        System.out.println(btn_shopOfBooks.isDisplayed());
-        System.out.println(btn_shopOfBooks.isEnabled());
-//        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", btn_shopOfBooks);
-
         btn_shopOfBooks.click();
     }
 }
